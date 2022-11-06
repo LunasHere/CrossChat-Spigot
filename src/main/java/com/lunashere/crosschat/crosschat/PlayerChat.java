@@ -1,0 +1,32 @@
+package com.lunashere.crosschat.crosschat;
+
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
+public class PlayerChat implements Listener {
+
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Forward");
+        out.writeUTF("ALL");
+        out.writeUTF("CrossChat");
+
+        ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
+        DataOutputStream msgout = new DataOutputStream(msgbytes);
+        try {
+            msgout.writeUTF(e.getPlayer().getName() + ": " + e.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        out.writeShort(msgbytes.toByteArray().length);
+        out.write(msgbytes.toByteArray());
+
+        e.getPlayer().sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
+    }
+
+}
