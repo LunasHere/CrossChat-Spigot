@@ -1,5 +1,6 @@
 package com.lunashere.crosschat.crosschat;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import java.io.ByteArrayInputStream;
@@ -26,7 +27,7 @@ public class ChannelListener implements PluginMessageListener {
                 DataInputStream msgin = new DataInputStream(new ByteArrayInputStream(msgbytes));
                 String msg = msgin.readUTF();
                 for (Player p : player.getServer().getOnlinePlayers()) {
-                    p.sendMessage(msg);
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
                 }
             } else if(subchannel.equals("GetServer")) {
                 String server = in.readUTF();

@@ -2,10 +2,12 @@ package com.lunashere.crosschat.crosschat;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.sun.tools.javac.util.StringUtils;
 import net.luckperms.api.model.user.User;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.util.StringUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -29,7 +31,7 @@ public class PlayerChat implements Listener {
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
         DataOutputStream msgout = new DataOutputStream(msgbytes);
         try {
-            msgout.writeUTF("[" + Main.serverName + "] " + prefix + e.getPlayer().getName() + ": " + e.getMessage());
+            msgout.writeUTF("[" + capitalize(Main.serverName) + "] " + prefix + " " + e.getPlayer().getName() + ": " + e.getMessage());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -37,6 +39,13 @@ public class PlayerChat implements Listener {
         out.write(msgbytes.toByteArray());
 
         e.getPlayer().sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
+    }
+
+    public static String capitalize(String str) {
+        if(str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
 }
