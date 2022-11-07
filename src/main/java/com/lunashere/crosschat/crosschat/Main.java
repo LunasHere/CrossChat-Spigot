@@ -1,11 +1,20 @@
 package com.lunashere.crosschat.crosschat;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
+
+    // LuckPerms API
+    public static LuckPerms luckPerms;
+
+    public static String serverName;
 
     @Override
     public void onEnable() {
@@ -19,13 +28,23 @@ public final class Main extends JavaPlugin {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
             LuckPerms api = provider.getProvider();
-
+            luckPerms = api;
         }
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public static void setCurrentServer(){
+        if(serverName == null) {
+            ByteArrayDataOutput out = ByteStreams.newDataOutput();
+            out.writeUTF("GetServer");
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.sendPluginMessage(getPlugin(Main.class), "BungeeCord", out.toByteArray());
+            }
+        }
     }
 
 }

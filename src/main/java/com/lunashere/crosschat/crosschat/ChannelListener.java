@@ -9,6 +9,12 @@ public class ChannelListener implements PluginMessageListener {
 
     @Override
     public synchronized void onPluginMessageReceived(String channel, Player player, byte[] message) {
+
+        if (!channel.equals("BungeeCord")) {
+            return;
+        }
+
+
         DataInputStream in = new DataInputStream(new ByteArrayInputStream(message));
         try {
             String subchannel = in.readUTF();
@@ -22,6 +28,9 @@ public class ChannelListener implements PluginMessageListener {
                 for (Player p : player.getServer().getOnlinePlayers()) {
                     p.sendMessage(msg);
                 }
+            } else if(subchannel.equals("GetServer")) {
+                String server = in.readUTF();
+                Main.serverName = server;
             }
         } catch (Exception e) {
             e.printStackTrace();
