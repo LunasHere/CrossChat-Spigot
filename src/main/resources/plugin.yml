@@ -3,4 +3,5 @@ version: '${project.version}'
 main: com.lunashere.crosschat.crosschat.Main
 api-version: 1.19
 authors: [ Luna ]
+depend: [LuckPerms]
 description: Cross server chat.
