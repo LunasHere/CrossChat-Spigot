@@ -2,12 +2,10 @@ package com.lunashere.crosschat.crosschat;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import com.sun.tools.javac.util.StringUtils;
 import net.luckperms.api.model.user.User;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.util.StringUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
