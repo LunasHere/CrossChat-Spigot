@@ -1,5 +1,6 @@
 package com.lunashere.crosschat.crosschat;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 

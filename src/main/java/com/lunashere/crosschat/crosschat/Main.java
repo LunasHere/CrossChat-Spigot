@@ -6,6 +6,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Register outgoing channel
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Register the channel listener
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new ChannelListener());
         // Register the player chat listener

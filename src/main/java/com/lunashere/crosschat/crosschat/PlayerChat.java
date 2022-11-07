@@ -2,15 +2,19 @@ package com.lunashere.crosschat.crosschat;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
 public class PlayerChat implements Listener {
+    @EventHandler
+    public void onPlayerChat(PlayerChatEvent e) {
 
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Forward");
         out.writeUTF("ALL");
