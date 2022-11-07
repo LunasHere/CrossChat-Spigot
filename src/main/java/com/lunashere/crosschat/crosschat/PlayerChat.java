@@ -16,6 +16,12 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void onPlayerChat(PlayerChatEvent e) {
 
+        if(Main.serverName == null) {
+            ByteArrayDataOutput out = ByteStreams.newDataOutput();
+            out.writeUTF("GetServer");
+            e.getPlayer().sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
+        }
+
         User user = luckPerms.getUserManager().getUser(e.getPlayer().getUniqueId());
         String prefix = user.getCachedData().getMetaData().getPrefix();
 
