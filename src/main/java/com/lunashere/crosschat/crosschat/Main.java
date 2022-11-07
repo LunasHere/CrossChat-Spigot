@@ -29,7 +29,6 @@ public final class Main extends JavaPlugin {
             LuckPerms api = provider.getProvider();
             luckPerms = api;
         }
-        Main.setCurrentServer();
     }
 
     @Override
@@ -37,14 +36,5 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public static void setCurrentServer(){
-        if(serverName == null) {
-            ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("GetServer");
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendPluginMessage(getPlugin(Main.class), "BungeeCord", out.toByteArray());
-            }
-        }
-    }
 
 }
