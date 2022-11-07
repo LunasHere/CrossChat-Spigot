@@ -36,5 +36,13 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    // Get the server name
+    public static void getServerName() {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("GetServer");
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
+        }
+    }
 
 }

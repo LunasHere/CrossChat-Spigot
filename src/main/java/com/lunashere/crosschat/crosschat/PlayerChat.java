@@ -16,14 +16,14 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void onPlayerChat(PlayerChatEvent e) {
 
-        if(Main.serverName == null) {
-            ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("GetServer");
-            e.getPlayer().sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", out.toByteArray());
-        }
+        Main.getServerName();
 
         User user = luckPerms.getUserManager().getUser(e.getPlayer().getUniqueId());
         String prefix = user.getCachedData().getMetaData().getPrefix();
+
+        if(prefix == null) {
+            prefix = "";
+        }
 
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Forward");
@@ -32,6 +32,7 @@ public class PlayerChat implements Listener {
 
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
         DataOutputStream msgout = new DataOutputStream(msgbytes);
+
         try {
             msgout.writeUTF("[" + capitalize(Main.serverName) + "] " + prefix + " " + e.getPlayer().getName() + ": " + e.getMessage());
         } catch (Exception ex) {
