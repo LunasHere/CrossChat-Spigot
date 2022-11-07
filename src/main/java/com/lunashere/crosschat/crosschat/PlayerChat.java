@@ -16,8 +16,6 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void onPlayerChat(PlayerChatEvent e) {
 
-        Main.setCurrentServer();
-
         User user = luckPerms.getUserManager().getUser(e.getPlayer().getUniqueId());
         String prefix = user.getCachedData().getMetaData().getPrefix();
 

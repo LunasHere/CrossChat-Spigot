@@ -29,6 +29,7 @@ public final class Main extends JavaPlugin {
             LuckPerms api = provider.getProvider();
             luckPerms = api;
         }
+        Main.setCurrentServer();
     }
 
     @Override
