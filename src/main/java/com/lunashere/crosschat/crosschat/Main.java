@@ -21,8 +21,9 @@ public final class Main extends JavaPlugin {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Register the channel listener
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new ChannelListener());
-        // Register the player chat listener
+        // Register events
         getServer().getPluginManager().registerEvents(new PlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new PlayerConnect(), this);
         // Register Luckperms API
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
